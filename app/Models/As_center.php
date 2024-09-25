@@ -11,4 +11,9 @@ class As_center extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function district()
+    {
+        return $this->belongsTo(district::class);
+    }
 }

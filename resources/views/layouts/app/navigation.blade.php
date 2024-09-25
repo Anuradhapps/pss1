@@ -12,7 +12,7 @@
             $applicationLogo = Cache::rememberForever('applicationLogo', function () {
                 return \App\Models\Setting::where('key', 'applicationLogo')->value('value');
             });
-            
+
             $applicationLogoDark = Cache::rememberForever('applicationLogoDark', function () {
                 return \App\Models\Setting::where('key', 'applicationLogoDark')->value('value');
             });
@@ -29,29 +29,23 @@
     </a>
 </div>
 
-@if (can('view_dashboard'))
+
     <x-nav.link route="admin" icon="fas fa-home">Dashboard</x-nav.link>
-@endif
-@if (can('view_dashboard')||can('collector_show') || can('collector_create') || can('collector_edit'))
-    <x-nav.group label="Collector" route="admin.settings" icon="fa fa-id-card">
+    <x-nav.link route="admin.collector.create" icon="fa fa-id-card">Collector info</x-nav.link>
+    <x-nav.link route="admin.collector.create" icon="fa fa-id-card">Collector info</x-nav.link>
+    <x-nav.link route="admin.collector.mycommon.index" icon="fa fa-id-card">My Records</x-nav.link>
+    
+
+{{-- @if (can('view_dashboard') )
+    <x-nav.group label="Collector"  icon="fa fa-id-card">
 
         <x-nav.group-item route="admin.collector.create" icon="far fa-circle">Add / Update info.
         </x-nav.group-item>
         <x-nav.group-item route="admin.collector.mycommon.index" icon="far fa-circle">My Records
         </x-nav.group-item>
-        {{-- <x-nav.group-item route="admin.collector.create" icon="far fa-circle">Create
-        </x-nav.group-item>
-        <x-nav.group-item route="admin.collector.create" icon="far fa-circle">
-        </x-nav.group-item> --}}
-
-        <x-nav.group-item route="admin.collector.records" icon="far fa-circle">Collectors Info.</x-nav.group-item>
-        <x-nav.group-item route="post.index" icon="far fa-circle">Report</x-nav.group-item>
-        <x-nav.group-item route="report1" icon="far fa-circle">Report 1</x-nav.group-item>
-        <x-nav.group-item route="report2" icon="far fa-circle">Report 2</x-nav.group-item>
-        <x-nav.group-item route="chart1" icon="far fa-circle">chart</x-nav.group-item>
 
     </x-nav.group>
-@endif
+@endif --}}
 @if (can('view_audit_trails') || can('view_sent_emails'))
     <x-nav.group label="Settings" route="admin.settings" icon="fas fa-cogs">
         @if (can('view_audit_trails'))

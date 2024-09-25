@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\TwoFaController;
 use App\Http\Controllers\CollectorController;
 use App\Http\Controllers\CommonDataCollectController;
 use App\Http\Controllers\PestDataCollectController;
+use App\Http\Controllers\UserController;
 use App\Http\Livewire\Admin\AuditTrails;
 use App\Http\Livewire\Admin\Dashboard;
 use App\Http\Livewire\Admin\Roles\Edit;
@@ -29,7 +30,8 @@ use App\Http\Livewire\Report2;
 use App\Http\Livewire\chart1;
 
 Route::get('/', Welcome::class);
-
+Route::get('/app', Dashboard::class)->name('admin');
+Route::get('/export-users', [UserController::class, 'exportUsers'])->name('export.users');
 //Route::get('/a',maindashboard::class)->name('main.dashboard');
 //unauthenticated
 Route::middleware(['web', 'guest'])->group(function () {
@@ -48,8 +50,6 @@ Route::middleware(['web', 'guest'])->group(function () {
     Route::get('join/{token}', [JoinController::class, 'index'])->name('join');
     Route::put('join/{id}', [JoinController::class, 'update'])->name('join.update');
 
-    Route::get('/report1',Report1::class)->name('report1');
-    Route::get('/chart1',chart1::class)->name('chart1');
 });
 
 //authenticated
@@ -71,40 +71,43 @@ Route::middleware(['web', 'auth', 'activeUser', 'IpCheckMiddleware'])->prefix('a
     Route::get('users/{user}', ShowUser::class)->name('admin.users.show');
 
 
-    Route::get('/report1',Report1::class)->name('report1');
-    Route::get('/chart1',chart1::class)->name('chart1');
+    // Route::get('/report1', Report1::class)->name('report1');
+    // Route::get('/chart1', chart1::class)->name('chart1');
 });
+
+
+
 Route::middleware(['web', 'auth', 'activeUser', 'IpCheckMiddleware', 'role:collector'])->prefix('admin')->group(function () {
-	Route::get('/get-as-centers/{id}', [CollectorController::class, 'getAsCenters'])->name('admin.get.as.centers');
+    Route::get('/', Dashboard::class)->name('admin');
 
+    Route::get('/get-as-centers/{id}', [CollectorController::class, 'getAsCenters'])->name('admin.get.as.centers');
     Route::get('/collector-my-records/commondata', [CommonDataCollectController::class, 'index'])->name('admin.collector.mycommon.index');
-    Route::get('/collector-my-records/pestdata/{id}', [PestDataCollectController::class, 'show'])->name('collector.visit.records.pest');
     Route::get('/specific-page-for-collector', [CollectorController::class, 'index'])->name('admin.collector.index');
-
     Route::get('/specific-page-for-collector/create', [CollectorController::class, 'create'])->name('admin.collector.create');
     Route::post('/specific-page-for-collector', [CollectorController::class, 'store'])->name('admin.collector.store');
     Route::post('/specific-page-for-collector/{collector}/edit', [CollectorController::class, 'edit'])->name('admin.collector.edit');
     Route::put('/specific-page-for-collector/{collector}', [CollectorController::class, 'update'])->name('admin.collector.update');
-    //Admin only routes- collectors
-
-    Route::get('/report1',Report1::class)->name('report1');
-    Route::get('/chart1',chart1::class)->name('chart1');
-   
+    
+    Route::get('/pestdata/{id}', [PestDataCollectController::class, 'show'])->name('pestdata.index');
 });
 //Admin only routes
 Route::middleware(['web', 'auth', 'activeUser', 'IpCheckMiddleware', 'role:admin'])->prefix('admin')->group(function () {
+    Route::get('/', Dashboard::class)->name('admin');
     Route::get('settings/system-settings', Settings::class)->name('admin.settings');
     Route::get('settings/roles', Roles::class)->name('admin.settings.roles.index');
     Route::get('settings/roles/{role}/edit', Edit::class)->name('admin.settings.roles.edit');
-   // Route::get('/collector-records', [CollectorController::class, 'view'])->name('admin.collector.records');
+    // Route::get('/collector-records', [CollectorController::class, 'view'])->name('admin.collector.records');
     Route::get('/collector-records', CollectorLivewire::class)->name('admin.collector.records');
     Route::get('/collector-show-common_data/{id}', [CommonDataCollectController::class, 'show'])->name('admin.collector.common.show');
     Route::get('/collector-show-pest_data/{id}', [PestDataCollectController::class, 'show'])->name('admin.collector.pest.show');
-    
-    Route::get('/report1',Report1::class)->name('report1');
-    Route::get('/chart1',chart1::class)->name('chart1');
+
+    Route::get('/report1', Report1::class)->name('report1');
+    Route::get('/chart1', chart1::class)->name('chart1');
 });
 
 //Route::get('/a',maindashboard::class)->name('main.dashboard');
-Route::get('/b',PostIndex::class)->name('post.index');
-Route::get('/report2',Report2::class)->name('report2');
+Route::get('/b', PostIndex::class)->name('post.index');
+Route::get('/report2', Report2::class)->name('report2');
+
+
+

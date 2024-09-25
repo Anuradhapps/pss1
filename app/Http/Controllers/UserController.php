@@ -12,10 +12,20 @@ use App\Helper\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+// In your controller (e.g., UserController.php)
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
+
+
+
 
 class UserController extends Controller
 {
-  
+    public function exportUsers()
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
+    }
+
 
     public function createUser(Request $request)
     {

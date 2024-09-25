@@ -63,12 +63,12 @@ class CollectorController extends Controller
         $request->validate([
             'phone_no' => 'required|unique:collectors',
             'district' => 'required',
-            // 'asc' => 'required',
-            // 'ai_range' => 'required',
-            // 'village' => 'required',
+            'asc' => 'required',
+            'ai_range' => 'required',
+            'village' => 'required',
             //  'gps_lati' => 'required',
             //  'gps_long' => 'required',
-            //   'rice_variety' => 'required',
+              'rice_variety' => 'required',
             'date_establish' => 'required',
         ]);
         //dd($request);
@@ -86,7 +86,7 @@ class CollectorController extends Controller
         ]);
         $collector->save();
         //return redirect('/collectors')->with('success', 'Collector added successfully!');
-        return redirect()->route('admin.collector.index')->with('success', 'Student created successfully.');
+        return redirect()->route('admin.collector.index')->with('success', 'Collector Data created successfully.');
     }
     /**
      * Display the specified resource.

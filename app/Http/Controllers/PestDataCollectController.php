@@ -6,12 +6,13 @@ namespace App\Http\Controllers;
 
 use App\Models\PestDataCollect;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PestDataCollectController extends Controller
 {
     public function index()
     {
-        //
+        dd(Auth::user());
     }
 
     public function create()
@@ -26,7 +27,7 @@ class PestDataCollectController extends Controller
 
     public function show($Id)
     {
-        $pests = PestDataCollect::where('common_data_collectors_id', '=', $Id)->get(); 
+        $pests = PestDataCollect::where('common_data_collectors_id', '=', $Id)->get();
         return view('collectors.show-pest-records', compact('pests'));
        
     }

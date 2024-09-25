@@ -15,4 +15,9 @@ class CommonDataCollect extends Model
         'user_id', 'c_date', 'temperature', 'numbrer_r_day', 'growth_s_c','otherdet'
 
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

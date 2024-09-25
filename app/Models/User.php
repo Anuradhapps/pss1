@@ -46,4 +46,13 @@ class User extends Authenticatable
     {
         return $this->hasOne(__CLASS__, 'id', 'invited_by');
     }
+
+    public function collector(){
+
+        return $this->hasOne(Collector::class, 'user_id', 'id');
+    }
+    public function commonDataCollect(){
+
+        return $this->hasMany(CommonDataCollect::class, 'user_id', 'id');
+    }
 }
