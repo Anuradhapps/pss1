@@ -20,4 +20,8 @@ class CommonDataCollect extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function pestDataCollect()
+    {
+        return $this->hasMany(PestDataCollect::class);
+    }
 }

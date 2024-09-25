@@ -81,14 +81,25 @@ Route::middleware(['web', 'auth', 'activeUser', 'IpCheckMiddleware', 'role:colle
     Route::get('/', Dashboard::class)->name('admin');
 
     Route::get('/get-as-centers/{id}', [CollectorController::class, 'getAsCenters'])->name('admin.get.as.centers');
-    Route::get('/collector-my-records/commondata', [CommonDataCollectController::class, 'index'])->name('admin.collector.mycommon.index');
     Route::get('/specific-page-for-collector', [CollectorController::class, 'index'])->name('admin.collector.index');
     Route::get('/specific-page-for-collector/create', [CollectorController::class, 'create'])->name('admin.collector.create');
     Route::post('/specific-page-for-collector', [CollectorController::class, 'store'])->name('admin.collector.store');
     Route::post('/specific-page-for-collector/{collector}/edit', [CollectorController::class, 'edit'])->name('admin.collector.edit');
     Route::put('/specific-page-for-collector/{collector}', [CollectorController::class, 'update'])->name('admin.collector.update');
     
-    Route::get('/pestdata/{id}', [PestDataCollectController::class, 'show'])->name('pestdata.index');
+    Route::get('/collector-my-records/commondata', [CommonDataCollectController::class, 'index'])->name('admin.collector.mycommon.index');
+    
+    // Index Route
+Route::get('/pestdata', [PestDataCollectController::class, 'index'])->name('pestdata.index');
+Route::get('/pestdata/create', [PestDataCollectController::class, 'create'])->name('pestdata.create');
+Route::post('/pestdata', [PestDataCollectController::class, 'store'])->name('pestdata.store');
+Route::get('/pestdata/{id}', [PestDataCollectController::class, 'show'])->name('pestdata.show');
+Route::get('/pestdata/{id}/edit', [PestDataCollectController::class, 'edit'])->name('pestdata.edit');
+Route::put('/pestdata/{id}', [PestDataCollectController::class, 'update'])->name('pestdata.update');
+Route::delete('/pestdata/{id}', [PestDataCollectController::class, 'destroy'])->name('pestdata.destroy');
+
+
+Route::get('/pestdata/{id}', [PestDataCollectController::class, 'show'])->name('pestdata.index');
 });
 //Admin only routes
 Route::middleware(['web', 'auth', 'activeUser', 'IpCheckMiddleware', 'role:admin'])->prefix('admin')->group(function () {

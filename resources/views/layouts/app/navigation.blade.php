@@ -32,8 +32,8 @@
 
     <x-nav.link route="admin" icon="fas fa-home">Dashboard</x-nav.link>
     <x-nav.link route="admin.collector.create" icon="fa fa-id-card">Collector info</x-nav.link>
+    <x-nav.link route="admin.collector.mycommon.index" icon="fa fa-id-card">Common Data</x-nav.link>
     <x-nav.link route="admin.collector.create" icon="fa fa-id-card">Collector info</x-nav.link>
-    <x-nav.link route="admin.collector.mycommon.index" icon="fa fa-id-card">My Records</x-nav.link>
     
 
 {{-- @if (can('view_dashboard') )

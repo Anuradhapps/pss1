@@ -15,4 +15,8 @@ class PestDataCollect extends Model
 
         'common_data_collectors_id', 'pest_name', 'location_one', 'location_two', 'location_three', 'location_four', 'location_five', 'location_six', 'location_seven', 'location_eight', 'location_nine', 'location_ten'
     ];
+    public function commonDataCollect()
+    {
+        return $this->belongsTo(CommonDataCollect::class);
+    }
 }
