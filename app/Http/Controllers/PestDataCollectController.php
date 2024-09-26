@@ -15,14 +15,13 @@ class PestDataCollectController extends Controller
     {
         $user= Auth::user();
         $pestAndCommonData = CommonDataCollect::where('user_id', '3898902b-6174-46a6-9864-7dea9ecac78e')->get();
-        dd($pestAndCommonData->pestDataCollect);
 
-        return view('pestData.index',['PestAndCommonData'=>$pestAndCommonData]);
+        return view('pestData.edit',['PestAndCommonData'=>$pestAndCommonData]);
     }
 
     public function create()
     {
-        //
+        return view('pestData.create');
     }
 
     public function store(Request $request)
