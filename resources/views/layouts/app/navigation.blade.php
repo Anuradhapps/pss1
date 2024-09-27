@@ -34,6 +34,7 @@
     <x-nav.link route="admin.collector.create" icon="fa fa-id-card">Collector info</x-nav.link>
     <x-nav.link route="pestdata.index" icon="fa fa-id-card">Pest Data</x-nav.link>
 
+
     
 
 {{-- @if (can('view_dashboard') )
@@ -66,4 +67,5 @@
 
 @if (can('view_users'))
     <x-nav.link route="admin.users.index" icon="fas fa-users">Users</x-nav.link>
+    <x-nav.link route="pest.index" icon="fa fa-id-card">Pest</x-nav.link>
 @endif

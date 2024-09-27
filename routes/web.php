@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\TwoFaController;
 use App\Http\Controllers\CollectorController;
 use App\Http\Controllers\CommonDataCollectController;
 use App\Http\Controllers\PestDataCollectController;
+use App\Http\Controllers\PestController;
 use App\Http\Controllers\UserController;
 use App\Http\Livewire\Admin\AuditTrails;
 use App\Http\Livewire\Admin\Dashboard;
@@ -91,12 +92,13 @@ Route::middleware(['web', 'auth', 'activeUser', 'IpCheckMiddleware', 'role:colle
     // Index Route
     Route::get('/pestdata', [PestDataCollectController::class, 'index'])->name('pestdata.index');
     Route::get('/pestdata/create', [PestDataCollectController::class, 'create'])->name('pestdata.create');
-    Route::post('/pestdata', [PestDataCollectController::class, 'store'])->name('pestdata.store');
+    Route::post('/pestdata/store', [PestDataCollectController::class, 'store'])->name('pestdata.store');
     Route::get('/pestdata/{id}', [PestDataCollectController::class, 'show'])->name('pestdata.show');
     Route::get('/pestdata/{id}/edit', [PestDataCollectController::class, 'edit'])->name('pestdata.edit');
     Route::put('/pestdata/{id}', [PestDataCollectController::class, 'update'])->name('pestdata.update');
     Route::delete('/pestdata/{id}', [PestDataCollectController::class, 'destroy'])->name('pestdata.destroy');
-
+    
+   
 });
 //Admin only routes
 Route::middleware(['web', 'auth', 'activeUser', 'IpCheckMiddleware', 'role:admin'])->prefix('admin')->group(function () {
@@ -109,10 +111,12 @@ Route::middleware(['web', 'auth', 'activeUser', 'IpCheckMiddleware', 'role:admin
     Route::get('/collector-show-common_data/{id}', [CommonDataCollectController::class, 'show'])->name('admin.collector.common.show');
     Route::get('/collector-show-pest_data/{id}', [PestDataCollectController::class, 'show'])->name('admin.collector.pest.show');
 
-    Route::get('/report1', Report1::class)->name('report1');
-    Route::get('/chart1', chart1::class)->name('chart1');
+    Route::get('/pest', [PestController::class, 'index'])->name('pest.index');
+    Route::get('/pest/create', [PestController::class, 'create'])->name('pest.create');
+    Route::post('/pest', [PestController::class, 'store'])->name('pest.store');
+    Route::get('/pest/{id}', [PestController::class, 'show'])->name('pest.show');
+    Route::get('/pest/{id}/edit', [PestController::class, 'edit'])->name('pest.edit');
+    Route::put('/pest/{id}', [PestController::class, 'update'])->name('pest.update');
+    Route::delete('/pest/{id}', [PestController::class, 'destroy'])->name('pest.destroy');
 });
 
-//Route::get('/a',maindashboard::class)->name('main.dashboard');
-Route::get('/b', PostIndex::class)->name('post.index');
-Route::get('/report2', Report2::class)->name('report2');

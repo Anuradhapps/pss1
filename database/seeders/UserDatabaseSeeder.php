@@ -24,12 +24,12 @@ class UserDatabaseSeeder extends Seeder
         Permission::firstOrCreate(['name' => 'delete_users', 'label' => 'Delete Users', 'module' => 'Users']);
 
         //create developer uncomment to use when seeding
-        /*
+        
         $user = User::firstOrCreate(['email' => 'user@domain.com'], [
-            'name'                 => 'Username',
-            'slug'                 => 'username',
-            'email'                => 'user@domain.com',
-            'password'             => bcrypt('ChangeMe!'),
+            'name'                 => 'Adminuser',
+            'slug'                 => 'adminuser',
+            'email'                => 'Adminuser@domain.com',
+            'password'             => bcrypt('Adminuser'),
             'is_active'            => 1,
             'is_office_login_only' => 0
         ]);
@@ -49,6 +49,6 @@ class UserDatabaseSeeder extends Seeder
             'role_id' => $role->id,
             'user_id' => $user->id
         ]);
-        */
+        
     }
 }
