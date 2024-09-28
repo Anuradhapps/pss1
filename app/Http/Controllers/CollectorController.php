@@ -10,6 +10,7 @@ use App\Models\District;
 use App\Models\As_center;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class CollectorController extends Controller
 {
@@ -71,7 +72,7 @@ class CollectorController extends Controller
               'rice_variety' => 'required',
             'date_establish' => 'required',
         ]);
-        //dd($request);
+        $dateEstablish = Carbon::createFromFormat('d-m-Y', $request->get('date_establish'))->format('Y-m-d');
         $collector = new Collector([
             'user_id' => Auth::user()->id,
             'phone_no' => $request->get('phone_no'),
@@ -82,7 +83,7 @@ class CollectorController extends Controller
             'gps_lati' => $request->get('gps_lati'),
             'gps_long' => $request->get('gps_long'),
             'rice_variety' => $request->get('rice_variety'),
-            'date_establish' => $request->get('date_establish'),
+            'date_establish' => $dateEstablish,
         ]);
         $collector->save();
         //return redirect('/collectors')->with('success', 'Collector added successfully!');
@@ -130,7 +131,8 @@ class CollectorController extends Controller
      */
     public function update(Request $request, Collector $collector)
     {
-            
+        $dateEstablish = Carbon::createFromFormat('d-m-Y', $request->get('date_establish'))->format('Y-m-d');
+
            $collector->phone_no = $request->phone_no;
            $collector->district = $request->district;
            $collector->asc =$request->asc;
@@ -139,7 +141,7 @@ class CollectorController extends Controller
            $collector->gps_lati = $request->gps_lati;
            $collector->gps_long = $request->gps_long;
            $collector->rice_variety = $request->rice_variety;
-           $collector->date_establish = $request->date_establish;
+           $collector->date_establish = $dateEstablish;
            $collector->save();
         return redirect()->route('admin.collector.index')->with('success', 'Collector updated successfully.');
     }

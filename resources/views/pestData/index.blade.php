@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="flex justify-between">
-        <h1 class="text-2xl font-bold mb-4 text-red-900">Pest Data</h1>
-        <a href="{{ route('pestdata.create') }}" class="btn btn-primary ">Add</a>
+        <h1 class="text-2xl font-bold ml-2 text-gray-300">Pest Data</h1>
+        <a href="{{ route('pestdata.create') }}" class="bg-green-800 text-white font-bold py-2 px-4 rounded hover:bg-green-900 text-sm mr-1">Add</a>
     </div>
     {{-- <x-form method="POST" action="{{ route('admin.collector.update', $collector) }}"> --}}
 
@@ -22,7 +22,7 @@
                     @foreach ($CommonData as $row)
                    
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <td class="py-4 px-6">{{ $row->created_at->format('Y-m-d') }}</td>
+                            <td class="py-4 px-6">{{ $row->created_at }}</td>
 
                             <td class="py-4 px-6"> {{ $row->growth_s_c }}</td>
                             <td class="py-4 px-6">

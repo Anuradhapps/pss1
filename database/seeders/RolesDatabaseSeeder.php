@@ -13,6 +13,7 @@ class RolesDatabaseSeeder extends Seeder
         Model::unguard();
 
         Role::firstOrCreate(['name' => 'admin', 'label' => 'Admin']);
+        Role::firstOrCreate(['name' => 'collector', 'label' => 'Collector']);
         Role::firstOrCreate(['name' => 'user', 'label' => 'User']);
     }
 }

@@ -12,9 +12,9 @@ return new class extends Migration
     {
         Schema::create('districts', function (Blueprint $table) {
             $table->id();
-            $table->integer('code');
+            $table->integer('code')->nullable();
             $table->string('name');
-            $table->integer('p_id');
+            $table->integer('p_id')->nullable();
             $table->timestamps();
         });
     }

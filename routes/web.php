@@ -24,11 +24,6 @@ use App\Http\Livewire\Admin\Users\ShowUser;
 use App\Http\Livewire\Admin\Users\Users;
 use App\Http\Livewire\Welcome;
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\maindashboard;
-use App\Http\Livewire\PostIndex;
-use App\Http\Livewire\Report1;
-use App\Http\Livewire\Report2;
-use App\Http\Livewire\chart1;
 
 Route::get('/', Welcome::class);
 Route::get('/app', Dashboard::class)->name('admin');
@@ -69,10 +64,6 @@ Route::middleware(['web', 'auth', 'activeUser', 'IpCheckMiddleware'])->prefix('a
     Route::get('users', Users::class)->name('admin.users.index');
     Route::get('users/{user}/edit', EditUser::class)->name('admin.users.edit');
     Route::get('users/{user}', ShowUser::class)->name('admin.users.show');
-
-
-    // Route::get('/report1', Report1::class)->name('report1');
-    // Route::get('/chart1', chart1::class)->name('chart1');
 });
 
 

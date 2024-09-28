@@ -1,20 +1,22 @@
 @section('title', 'Add My info')
 <x-app-layout>
-    <!-- resources/views/collector.blade.php -->
-    <x-form action="{{ route('admin.collector.store') }}">
-        <x-form.input name="phone_no" label="Phone Number:">{{ old('phone_no') }}</x-form.input>
-        <x-form.select name="district" label="District:">
-            <option value="">-- Select District --</option>
-            @foreach ($districts as $district)
+    <div class="m-5">
+        <!-- resources/views/collector.blade.php -->
+        <x-form action="{{ route('admin.collector.store') }}">
+            <x-form.input name="phone_no" label="Phone Number:">{{ old('phone_no') }}</x-form.input>
+            <x-form.select name="district" label="District:">
+                <option value="">-- Select District --</option>
+                @foreach ($districts as $district)
                 <option value="{{ $district->id }}">{{ $district->name }}</option>
-            @endforeach
+                @endforeach
             </x-form.select>
 
             <div class="mb-5">
-            <label for='asc' class='block mb-2 font-bold text-sm text-gray-600 dark:text-gray-200'>ASC/Unit</label>
-              <select class="border border-gray-300 dark:bg-gray-500 dark:text-gray-200 p-1 w-full rounded" name="asc" id="as_center">
-                  <option value="">-- Select ASC --</option>
-              </select>
+                <label for='asc' class='block mb-2 font-bold text-sm text-gray-600 dark:text-gray-200'>ASC/Unit</label>
+                <select class="border border-gray-300 dark:bg-gray-500 dark:text-gray-200 p-1 w-full rounded" name="asc"
+                    id="as_center">
+                    <option value="">-- Select ASC --</option>
+                </select>
             </div>
             <x-form.input name="ai_range" label="AI Range:">{{ old('ai_range') }}</x-form.input>
             <x-form.input name="village" label="Village:">{{ old('village') }}</x-form.input>
@@ -23,9 +25,9 @@
             <x-form.input name="rice_variety" label="Rice Variety:">{{ old('rice_variety') }}</x-form.input>
             <x-form.date name="date_establish" label="Date Established:">{{ old('date_establish') }}</x-form.date>
             <x-form.submit>Save</x-form.submit>
-    </x-form>
-  <script>
-        document.querySelector('#district').addEventListener('change', function() {
+        </x-form>
+        <script>
+            document.querySelector('#district').addEventListener('change', function() {
 
             var Id = this.value; // get the selected district ID
             var xhr = new XMLHttpRequest();
@@ -50,5 +52,6 @@
             xhr.send();
 
         });
-    </script>
+        </script>
+    </div>
 </x-app-layout>

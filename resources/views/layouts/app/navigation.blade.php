@@ -8,64 +8,61 @@
 <div class="py-4">
     <a href="{{ route('admin') }}" class="text-gray-100 font-bold">
         @php
-            //cache the logo setting to reduce calling the database
-            $applicationLogo = Cache::rememberForever('applicationLogo', function () {
-                return \App\Models\Setting::where('key', 'applicationLogo')->value('value');
-            });
+        //cache the logo setting to reduce calling the database
+        $applicationLogo = Cache::rememberForever('applicationLogo', function () {
+        return \App\Models\Setting::where('key', 'applicationLogo')->value('value');
+        });
 
-            $applicationLogoDark = Cache::rememberForever('applicationLogoDark', function () {
-                return \App\Models\Setting::where('key', 'applicationLogoDark')->value('value');
-            });
+        $applicationLogoDark = Cache::rememberForever('applicationLogoDark', function () {
+        return \App\Models\Setting::where('key', 'applicationLogoDark')->value('value');
+        });
         @endphp
 
         @if (storage_exists($applicationLogo))
-            <picture>
-                <source srcset="{{ storage_url($applicationLogoDark) }}" media="(prefers-color-scheme: dark)">
-                <img src="{{ storage_url($applicationLogo) }}" alt="{{ config('app.name') }}">
-            </picture>
+        <picture>
+            <source srcset="{{ storage_url($applicationLogoDark) }}" media="(prefers-color-scheme: dark)">
+            <img src="{{ storage_url($applicationLogo) }}" alt="{{ config('app.name') }}">
+        </picture>
         @else
-            {{ config('app.name') }}
+        {{ config('app.name') }}
         @endif
     </a>
 </div>
 
 
-    <x-nav.link route="admin" icon="fas fa-home">Dashboard</x-nav.link>
-    <x-nav.link route="admin.collector.create" icon="fa fa-id-card">Collector info</x-nav.link>
-    <x-nav.link route="pestdata.index" icon="fa fa-id-card">Pest Data</x-nav.link>
 
 
-    
 
-{{-- @if (can('view_dashboard') )
-    <x-nav.group label="Collector"  icon="fa fa-id-card">
+<x-nav.link route="admin" icon="fas fa-home">Dashboard</x-nav.link>
+<x-nav.link route="admin.collector.create" icon="fa fa-id-card">Collector info</x-nav.link>
+<x-nav.link route="pestdata.index" icon="fa fa-id-card">Pest Data</x-nav.link>
 
-        <x-nav.group-item route="admin.collector.create" icon="far fa-circle">Add / Update info.
-        </x-nav.group-item>
-        <x-nav.group-item route="admin.collector.mycommon.index" icon="far fa-circle">My Records
-        </x-nav.group-item>
+@if (can('view_dashboard') )
 
-    </x-nav.group>
-@endif --}}
+
+
+
+
+@endif
 @if (can('view_audit_trails') || can('view_sent_emails'))
-    <x-nav.group label="Settings" route="admin.settings" icon="fas fa-cogs">
-        @if (can('view_audit_trails'))
-            <x-nav.group-item route="admin.settings.audit-trails.index" icon="far fa-circle">Audit Trails
-            </x-nav.group-item>
-        @endif
+<x-nav.group label="Settings" route="admin.settings" icon="fas fa-cogs">
+    @if (can('view_audit_trails'))
+    <x-nav.group-item route="admin.settings.audit-trails.index" icon="far fa-circle">Audit Trails
+    </x-nav.group-item>
+    @endif
 
-        @if (can('view_sent_emails'))
-            <x-nav.group-item route="admin.settings.sent-emails" icon="far fa-circle">Sent Emails</x-nav.group-item>
-        @endif
+    @if (can('view_sent_emails'))
+    <x-nav.group-item route="admin.settings.sent-emails" icon="far fa-circle">Sent Emails</x-nav.group-item>
+    @endif
 
-        @if (is_admin())
-            <x-nav.group-item route="admin.settings" icon="far fa-circle">System Settings</x-nav.group-item>
-            <x-nav.group-item route="admin.settings.roles.index" icon="far fa-circle">Roles</x-nav.group-item>
-        @endif
-    </x-nav.group>
+    @if (is_admin())
+    <x-nav.group-item route="admin.settings" icon="far fa-circle">System Settings</x-nav.group-item>
+    <x-nav.group-item route="admin.settings.roles.index" icon="far fa-circle">Roles</x-nav.group-item>
+    @endif
+</x-nav.group>
 @endif
 
 @if (can('view_users'))
-    <x-nav.link route="admin.users.index" icon="fas fa-users">Users</x-nav.link>
-    <x-nav.link route="pest.index" icon="fa fa-id-card">Pest</x-nav.link>
+<x-nav.link route="admin.users.index" icon="fas fa-users">Users</x-nav.link>
+<x-nav.link route="pest.index" icon="fa fa-id-card">Pest</x-nav.link>
 @endif

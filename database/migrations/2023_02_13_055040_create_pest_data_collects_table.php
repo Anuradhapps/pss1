@@ -13,7 +13,7 @@ return new class extends Migration
         Schema::create('pest_data_collects', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('common_data_collectors_id');
-            $table->integer('pest_name');
+            $table->string('pest_name');    
             $table->integer('location_one');
             $table->integer('location_two');
             $table->integer('location_three');
@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('location_eight');
             $table->integer('location_nine');
             $table->integer('location_ten');
+            $table->integer('total')->nullable();
             $table->foreign('common_data_collectors_id')->references('id')->on('common_data_collects')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
