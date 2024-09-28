@@ -1,17 +1,17 @@
 <x-app-layout>
     <div class="flex justify-between mb-4">
         <h1 class="text-2xl font-bold text-red-900 ">Create Pest Data</h1>
-        <a href="{{ route('pestdata.index') }}" class="btn btn-primary">Back</a>
+        <a href="{{ route('pestdata.index') }}" class="bg-red-800 text-white font-bold py-2 px-4 rounded hover:bg-red-900 text-sm mr-1">Back</a>
     </div>
 
     <x-form method="POST" action="{{ route('pestdata.store') }}">
         @csrf
         <div class="grid grid-cols-2 gap-4 mb-6">
             <div class="col-span-2 sm:col-span-1">
-                <x-form.date name="date_collected" label="Date of Collected Data:" />
+                <x-form.date name="date_collected" label="Date of Collected Data:"/>
             </div>
             <div class="col-span-2 sm:col-span-1">
-                <x-form.input type="number" name="temperature" label="Temperature:" value="0" />
+                <x-form.input type="number" name="temperature" label="Temperature:">0</x-form.input>
             </div>
             <div class="col-span-2 sm:col-span-1">
                 <x-form.select id="growth_s_c" label="Growth Stage Code" class="block mt-1 w-full" name="growth_s_c">
@@ -60,7 +60,7 @@
                     <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-10 gap-4">
                         
                             <div class="col-span-1">
-                                <x-form.input type="number" name="{{ $pest->id }}all_location" label="All Location :" >0</x-form.input>
+                                <x-form.input type="number" name="{{ $pest->id }}all_location" label="All Location:" >0</x-form.input>
                             </div>
 
                     </div>

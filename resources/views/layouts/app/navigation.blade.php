@@ -44,6 +44,11 @@
 
 
 @endif
+@if (can('view_users'))
+<x-nav.link route="admin.users.index" icon="fas fa-users">Users</x-nav.link>
+<x-nav.link route="pest.index" icon="fa fa-id-card">Pest</x-nav.link>
+<x-nav.link route="report.index" icon="fa fa-id-card">Report</x-nav.link>
+@endif
 @if (can('view_audit_trails') || can('view_sent_emails'))
 <x-nav.group label="Settings" route="admin.settings" icon="fas fa-cogs">
     @if (can('view_audit_trails'))
@@ -62,7 +67,3 @@
 </x-nav.group>
 @endif
 
-@if (can('view_users'))
-<x-nav.link route="admin.users.index" icon="fas fa-users">Users</x-nav.link>
-<x-nav.link route="pest.index" icon="fa fa-id-card">Pest</x-nav.link>
-@endif

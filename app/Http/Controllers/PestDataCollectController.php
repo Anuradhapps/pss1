@@ -57,16 +57,16 @@ class PestDataCollectController extends Controller
             'location_nine' => $request->input('Number_Of_Tillers_location_9'),
             'location_ten' => $request->input('Number_Of_Tillers_location_10'),
             'total' =>
-                        $request->input('Number_Of_Tillers_location_1', 0) +
-                        $request->input('Number_Of_Tillers_location_2', 0) +
-                        $request->input('Number_Of_Tillers_location_3', 0) +
-                        $request->input('Number_Of_Tillers_location_4', 0) +
-                        $request->input('Number_Of_Tillers_location_5', 0) +
-                        $request->input('Number_Of_Tillers_location_6', 0) +
-                        $request->input('Number_Of_Tillers_location_7', 0) +
-                        $request->input('Number_Of_Tillers_location_8', 0) +
-                        $request->input('Number_Of_Tillers_location_9', 0) +
-                        $request->input('Number_Of_Tillers_location_10', 0)
+            $request->input('Number_Of_Tillers_location_1', 0) +
+                $request->input('Number_Of_Tillers_location_2', 0) +
+                $request->input('Number_Of_Tillers_location_3', 0) +
+                $request->input('Number_Of_Tillers_location_4', 0) +
+                $request->input('Number_Of_Tillers_location_5', 0) +
+                $request->input('Number_Of_Tillers_location_6', 0) +
+                $request->input('Number_Of_Tillers_location_7', 0) +
+                $request->input('Number_Of_Tillers_location_8', 0) +
+                $request->input('Number_Of_Tillers_location_9', 0) +
+                $request->input('Number_Of_Tillers_location_10', 0)
         ]);
         $pests = Pest::all();
         foreach ($pests as $pest) {
@@ -101,7 +101,7 @@ class PestDataCollectController extends Controller
                     'location_nine' => $request->input($pest->id . '_location_9'),
                     'location_ten' => $request->input($pest->id . '_location_10'),
                     'total' =>
-                        $request->input($pest->id . '_location_1', 0) +
+                    $request->input($pest->id . '_location_1', 0) +
                         $request->input($pest->id . '_location_2', 0) +
                         $request->input($pest->id . '_location_3', 0) +
                         $request->input($pest->id . '_location_4', 0) +
@@ -120,19 +120,78 @@ class PestDataCollectController extends Controller
 
     public function show($Id)
     {
-        $pests = PestDataCollect::where('common_data_collectors_id', '=', $Id)->get();
-
-        return view('collectors.show-pest-records', compact('pests'));
+        $pests = Pest::all();
+        $commonData = CommonDataCollect::findOrFail($Id);
+        $pestsData = PestDataCollect::where('common_data_collectors_id', '=', $Id)->get();
+        return view('pestData.show', ['pestsData' => $pestsData, 'commonData' => $commonData, 'pests' => $pests]);
     }
 
-    public function edit(PestDataCollect $pestDataCollect)
+    public function edit($Id)
     {
-        //
+        $pests = Pest::all();
+        $commonData = CommonDataCollect::findOrFail($Id);
+        $pestsData = PestDataCollect::where('common_data_collectors_id', '=', $Id)->get();
+        return view('pestData.edit', ['pestsData' => $pestsData, 'commonData' => $commonData, 'pests' => $pests]);
     }
 
-    public function update(Request $request, PestDataCollect $pestDataCollect)
+    public function update(Request $request, $Id)
     {
-        //
+
+        $commonData = CommonDataCollect::findOrFail($Id);
+        $commonData->update([
+            'c_date' => $request->input('date_collected'),
+            'temperature' => $request->input('temperature'),
+            'numbrer_r_day'=> $request->input('numbrer_r_day'),
+            'growth_s_c'=>$request->input('growth_s_c'),
+        ]);
+        $pestsData = PestDataCollect::where('common_data_collectors_id', '=', $Id)->get();
+        foreach ($pestsData as $pestData) {
+
+            if ($pestData->name == 'Thrips'){
+                $pestData->update([
+                    'location_one' => 0,
+                    'location_two' => 0,
+                    'location_three' => 0,
+                    'location_four' => 0,
+                    'location_five' => 0,
+                    'location_six' => 0,
+                    'location_seven' => 0,
+                    'location_eight' => 0,
+                    'location_nine' => 0,
+                    'location_ten' => 0,
+                    'total' => $request->input($pestData->name . 'all_location')
+                ]);
+            }else{
+                
+                $pestData->update([
+                    
+                    'location_one' => $request->input($pestData->pest_name . '_location_1'),
+                    'location_two' => $request->input(key: $pestData->pest_name . '_location_2'),
+                    'location_three' => $request->input($pestData->pest_name . '_location_3'),  
+                    'location_four' => $request->input($pestData->pest_name . '_location_4'),
+                    'location_five' => $request->input($pestData->pest_name . '_location_5'),
+                    'location_six' => $request->input($pestData->pest_name . '_location_6'),
+                    'location_seven' => $request->input($pestData->pest_name . '_location_7'),
+                    'location_eight' => $request->input($pestData->pest_name . '_location_8'),
+                    'location_nine' => $request->input($pestData->pest_name . '_location_9'),
+                    'location_ten' => $request->input($pestData->pest_name . '_location_10'),
+                    'total' =>
+                    $request->input($pestData->pest_name . '_location_1', 0) +
+                        $request->input($pestData->pest_name . '_location_2', 0) +
+                        $request->input($pestData->pest_name . '_location_3', 0) +
+                        $request->input($pestData->pest_name . '_location_4', 0) +
+                        $request->input($pestData->pest_name . '_location_5', 0) +
+                        $request->input($pestData->pest_name . '_location_6', 0) +
+                        $request->input($pestData->pest_name . '_location_7', 0) +
+                        $request->input($pestData->pest_name . '_location_8', 0) +
+                        $request->input($pestData->pest_name . '_location_9', 0) +
+                        $request->input($pestData->pest_name . '_location_10', 0)
+                ]);
+            }
+           
+        }
+
+        return redirect()->route('pestdata.index')->with('success', 'Pest Data updated successfully.');
     }
 
     public function destroy($id)

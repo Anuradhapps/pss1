@@ -10,6 +10,7 @@ use App\Http\Controllers\CollectorController;
 use App\Http\Controllers\CommonDataCollectController;
 use App\Http\Controllers\PestDataCollectController;
 use App\Http\Controllers\PestController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
 use App\Http\Livewire\Admin\AuditTrails;
 use App\Http\Livewire\Admin\Dashboard;
@@ -88,8 +89,6 @@ Route::middleware(['web', 'auth', 'activeUser', 'IpCheckMiddleware', 'role:colle
     Route::get('/pestdata/{id}/edit', [PestDataCollectController::class, 'edit'])->name('pestdata.edit');
     Route::put('/pestdata/{id}', [PestDataCollectController::class, 'update'])->name('pestdata.update');
     Route::delete('/pestdata/{id}', [PestDataCollectController::class, 'destroy'])->name('pestdata.destroy');
-    
-   
 });
 //Admin only routes
 Route::middleware(['web', 'auth', 'activeUser', 'IpCheckMiddleware', 'role:admin'])->prefix('admin')->group(function () {
@@ -109,5 +108,12 @@ Route::middleware(['web', 'auth', 'activeUser', 'IpCheckMiddleware', 'role:admin
     Route::get('/pest/{id}/edit', [PestController::class, 'edit'])->name('pest.edit');
     Route::put('/pest/{id}', [PestController::class, 'update'])->name('pest.update');
     Route::delete('/pest/{id}', [PestController::class, 'destroy'])->name('pest.destroy');
-});
 
+    Route::get('/report', [ReportController::class, 'index'])->name('report.index');
+    Route::get('/report/create', [ReportController::class, 'create'])->name('report.create');
+    Route::post('/report', [ReportController::class, 'store'])->name('report.store');
+    Route::get('/report/{id}', [ReportController::class, 'show'])->name('report.show');
+    Route::get('/report/{id}/edit', [ReportController::class, 'edit'])->name('report.edit');
+    Route::put('/report/{id}', [ReportController::class, 'update'])->name('report.update');
+    Route::delete('/report/{id}', [ReportController::class, 'destroy'])->name('report.destroy');
+});

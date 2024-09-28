@@ -1,4 +1,4 @@
-@section('title', 'Pest record')
+
 <x-app-layout>
     
     <table class="table-auto">
@@ -52,19 +52,7 @@
        
         <tbody>
             @foreach ($pests as $pest)
-            @php
-                $total = 0;
-                $total += $pest->location_one;
-                $total += $pest->location_two;
-                $total += $pest->location_three;
-                $total += $pest->location_four;
-                $total += $pest->location_five;
-                $total += $pest->location_six;
-                $total += $pest->location_seven;
-                $total += $pest->location_eight;
-                $total += $pest->location_nine;
-                $total += $pest->location_ten;
-            @endphp
+
             <tr>
                 <td>{{ $pest->pest_name }}</td>
                 <td>{{ $pest->location_one }}</td>
@@ -77,7 +65,7 @@
                 <td>{{ $pest->location_eight }}</td>
                 <td>{{ $pest->location_nine }}</td>
                 <td>{{ $pest->location_ten }}</td>
-                <td>{{ $total }}</td>
+                <td>{{ $pest->total }}</td>
                 <td></td>
                 
                 <td></td>

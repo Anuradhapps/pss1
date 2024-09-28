@@ -27,7 +27,7 @@
                             <td class="py-4 px-6"> {{ $row->growth_s_c }}</td>
                             <td class="py-4 px-6">
                                 <a class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 text-sm"
-                                    href="{{ route('pestdata.show', $row->id) }}">Edit</a>
+                                    href="{{ route('pestdata.show', $row->id) }}">view</a>
                                 <form action="{{ route('pestdata.destroy', $row->id) }}" method="POST"
                                     style="display:inline;" onsubmit="return confirmDelete()">
                                     @csrf
