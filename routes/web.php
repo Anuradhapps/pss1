@@ -69,7 +69,7 @@ Route::middleware(['web', 'auth', 'activeUser', 'IpCheckMiddleware'])->prefix('a
 
 
 
-Route::middleware(['web', 'auth', 'activeUser', 'IpCheckMiddleware', 'role:collector'])->prefix('admin')->group(function () {
+Route::middleware(['web', 'auth', 'activeUser', 'IpCheckMiddleware', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/', Dashboard::class)->name('admin');
 
     Route::get('/get-as-centers/{id}', [CollectorController::class, 'getAsCenters'])->name('admin.get.as.centers');

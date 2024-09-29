@@ -22,6 +22,6 @@ class CommonDataCollect extends Model
     }
     public function pestDataCollect()
     {
-        return $this->hasMany(PestDataCollect::class);
+        return $this->hasMany(PestDataCollect::class, 'common_data_collectors_id');
     }
 }

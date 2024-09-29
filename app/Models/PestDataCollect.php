@@ -17,6 +17,6 @@ class PestDataCollect extends Model
     ];
     public function commonDataCollect()
     {
-        return $this->belongsTo(CommonDataCollect::class);
+        return $this->belongsTo(CommonDataCollect::class, 'common_data_collectors_id');
     }
 }
